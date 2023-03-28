@@ -60,29 +60,49 @@ create table plane_route
     FOREIGN KEY (route_id) REFERENCES route (id)
 );
 
+create table order_status
+(
+    id           int         not null auto_increment,
+    status_order varchar(80) not null,
+    primary key (id)
+);
+
+
 create table orders
 (
-    id           int          not null auto_increment,
-    number_order int          not null,
-    date_order   varchar(256) not null,
-    status_order bit          not null,
-    route_id     int          not null,
-    plane_id     int          not null,
-    passenger_id int          not null,
+    id              int          not null auto_increment,
+    number_order    int          not null,
+    date_order      varchar(256) not null,
+    route_id        int          not null,
+    plane_id        int          not null,
+    passenger_id    int          not null,
+    order_status_id int          not null,
     primary key (id),
     FOREIGN KEY (route_id) REFERENCES route (id),
     FOREIGN KEY (plane_id) REFERENCES plane (id),
-    FOREIGN KEY (passenger_id) REFERENCES passenger (id)
+    FOREIGN KEY (passenger_id) REFERENCES passenger (id),
+    FOREIGN KEY (order_status_id) REFERENCES order_status (id)
+);
+
+create table payment_status
+(
+    id             int         not null auto_increment,
+    status_payment varchar(80) not null,
+    primary key (id)
+
 );
 
 create table payment
 (
-    id             int not null auto_increment,
-    status_payment bit not null,
-    orders_id      int not null,
+    id                int not null auto_increment,
+    orders_id         int not null,
+    payment_status_id int not null,
     primary key (id),
-    FOREIGN KEY (orders_id) REFERENCES orders (id)
+    FOREIGN KEY (orders_id) REFERENCES orders (id),
+    FOREIGN KEY (payment_status_id) REFERENCES payment_status (id)
 );
+
+
 
 create table ticket
 (

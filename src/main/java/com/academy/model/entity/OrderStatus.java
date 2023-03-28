@@ -5,8 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Payment {
+public class OrderStatus {
     private Integer id;
-    private Integer statusPaymentId;
-    private Integer orderId;
-}
+    private String statusOrder;
+  }

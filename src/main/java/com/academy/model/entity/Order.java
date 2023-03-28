@@ -12,5 +12,5 @@ public class Order {
     private Integer routeId;
     private Integer planeId;
     private Integer passengerId;
-    private Boolean statusOrder;
+    private Integer statusOrderId;
   }
