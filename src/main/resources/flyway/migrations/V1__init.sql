@@ -37,6 +37,16 @@ create table crew
     FOREIGN KEY (plane_id) REFERENCES plane (id)
 );
 
+create table air_crew
+(
+    id       int not null auto_increment,
+    plane_id int not null,
+    crew_id  int not null,
+    primary key (id),
+    FOREIGN KEY (plane_id) REFERENCES plane (id),
+    FOREIGN KEY (crew_id) REFERENCES crew (id)
+);
+
 create table route
 (
     id                int              not null auto_increment,
