@@ -7,17 +7,17 @@ import java.util.List;
 
 public class TicketRepositoryImpl implements TicketRepository {
     @Override
-    public void create(Ticket entity) {
+    public void create(Ticket ticket) {
 
     }
 
     @Override
-    public void update(Ticket entity) {
+    public void update(Ticket ticket) {
 
     }
 
     @Override
-    public void delete(Ticket entity) {
+    public void delete(Ticket ticket) {
 
     }
 
@@ -27,7 +27,7 @@ public class TicketRepositoryImpl implements TicketRepository {
     }
 
     @Override
-    public Ticket findById(Integer ID) {
+    public Ticket findById(Integer id) {
         return null;
     }
 }

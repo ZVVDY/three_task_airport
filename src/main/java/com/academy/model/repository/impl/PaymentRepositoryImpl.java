@@ -7,17 +7,17 @@ import java.util.List;
 
 public class PaymentRepositoryImpl implements PaymentRepository {
     @Override
-    public void create(Payment entity) {
+    public void create(Payment payment) {
 
     }
 
     @Override
-    public void update(Payment entity) {
+    public void update(Payment payment) {
 
     }
 
     @Override
-    public void delete(Payment entity) {
+    public void delete(Payment payment) {
 
     }
 
@@ -27,7 +27,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     }
 
     @Override
-    public Payment findById(Integer ID) {
+    public Payment findById(Integer id) {
         return null;
     }
 }

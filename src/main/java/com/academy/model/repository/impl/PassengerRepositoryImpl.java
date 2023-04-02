@@ -13,18 +13,58 @@ import java.util.List;
 @AllArgsConstructor
 public class PassengerRepositoryImpl implements PassengerRepository {
     @Override
-    public void create(Passenger entity) {
+    public void create(Passenger passenger) {
+        var connection = DataSourceManager.getInstance().getConnection();
 
+        var sql = "INSERT INTO passenger (first_name, sur_name, dob, sex, passport_number) VALUES (?, ?, ?, ?, ?)";
+
+        try (var preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, passenger.getFirstName());
+            preparedStatement.setString(2, passenger.getSurName());
+            preparedStatement.setString(3, passenger.getDob());
+            preparedStatement.setString(4, passenger.getSex());
+            preparedStatement.setString(5, passenger.getPassportNumber());
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void update(Passenger entity) {
+    public void update(Passenger passenger) {
+        var connection = DataSourceManager.getInstance().getConnection();
 
+        var sql = "UPDATE passenger SET first_name = ?, sur_name = ?, dob = ?, sex = ?,passport_number=?  WHERE id = ?";
+
+        try (var preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, passenger.getFirstName());
+            preparedStatement.setString(2, passenger.getSurName());
+            preparedStatement.setString(3, passenger.getDob());
+            preparedStatement.setString(4, passenger.getSex());
+            preparedStatement.setString(5, passenger.getPassportNumber());
+            /***
+             *
+             */
+            preparedStatement.setInt(6, passenger.getId());
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void delete(Passenger entity) {
+    public void delete(Passenger passenger) {
+        var connection = DataSourceManager.getInstance().getConnection();
 
+        var sql = "DELETE FROM passenger WHERE id = ?";
+
+        try (var preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, passenger.getId());
+
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -59,7 +99,30 @@ public class PassengerRepositoryImpl implements PassengerRepository {
     }
 
     @Override
-    public Passenger findById(Integer ID) {
-        return null;
+    public Passenger findById(Integer id) {
+        var passenger = Passenger.builder();
+
+        var connection = DataSourceManager.getInstance().getConnection();
+
+        var sql = "SELECT * FROM passenger WHERE id = ?";
+
+        try (var preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+
+            var resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                passenger
+                        .id(resultSet.getInt("id"))
+                        .firstName(resultSet.getString("first_name"))
+                        .surName(resultSet.getString("sur_name"))
+                        .dob(resultSet.getString("dob"))
+                        .sex(resultSet.getString("sex"))
+                        .passportNumber(resultSet.getString("passport_number"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return passenger.build();
     }
 }

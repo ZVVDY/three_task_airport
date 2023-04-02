@@ -7,17 +7,17 @@ import java.util.List;
 
 public class RouteRepositoryImpl implements RouteRepository {
     @Override
-    public void create(Route entity) {
+    public void create(Route route) {
 
     }
 
     @Override
-    public void update(Route entity) {
+    public void update(Route route) {
 
     }
 
     @Override
-    public void delete(Route entity) {
+    public void delete(Route route) {
 
     }
 
@@ -27,7 +27,7 @@ public class RouteRepositoryImpl implements RouteRepository {
     }
 
     @Override
-    public Route findById(Integer ID) {
+    public Route findById(Integer id) {
         return null;
     }
 }

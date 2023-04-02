@@ -7,17 +7,17 @@ import java.util.List;
 
 public class OrderRepositoryImpl implements OrderRepository {
     @Override
-    public void create(Order entity) {
+    public void create(Order order) {
 
     }
 
     @Override
-    public void update(Order entity) {
+    public void update(Order order) {
 
     }
 
     @Override
-    public void delete(Order entity) {
+    public void delete(Order order) {
 
     }
 
@@ -27,7 +27,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public Order findById(Integer ID) {
+    public Order findById(Integer id) {
         return null;
     }
 }

@@ -7,17 +7,17 @@ import java.util.List;
 
 public class PlaneRouteImpl implements PlaneRouteRepository {
     @Override
-    public void create(PlaneRoute entity) {
+    public void create(PlaneRoute planeRoute) {
 
     }
 
     @Override
-    public void update(PlaneRoute entity) {
+    public void update(PlaneRoute planeRoute) {
 
     }
 
     @Override
-    public void delete(PlaneRoute entity) {
+    public void delete(PlaneRoute planeRoute) {
 
     }
 
@@ -27,7 +27,7 @@ public class PlaneRouteImpl implements PlaneRouteRepository {
     }
 
     @Override
-    public PlaneRoute findById(Integer ID) {
+    public PlaneRoute findById(Integer id) {
         return null;
     }
 }

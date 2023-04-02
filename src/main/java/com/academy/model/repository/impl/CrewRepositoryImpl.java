@@ -7,17 +7,17 @@ import java.util.List;
 
 public class CrewRepositoryImpl implements CrewRepository {
     @Override
-    public void create(Crew entity) {
+    public void create(Crew crew) {
 
     }
 
     @Override
-    public void update(Crew entity) {
+    public void update(Crew crew) {
 
     }
 
     @Override
-    public void delete(Crew entity) {
+    public void delete(Crew crew) {
 
     }
 
@@ -27,7 +27,7 @@ public class CrewRepositoryImpl implements CrewRepository {
     }
 
     @Override
-    public Crew findById(Integer ID) {
+    public Crew findById(Integer id) {
         return null;
     }
 }
