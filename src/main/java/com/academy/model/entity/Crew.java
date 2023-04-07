@@ -12,5 +12,5 @@ public class Crew {
     private String name;
     private String surname;
     private String post;
-    private Integer planeId;
+    private Plane plane;
 }

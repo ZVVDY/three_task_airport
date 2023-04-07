@@ -25,11 +25,11 @@ VALUES (1, 'Victor', 'Shadrin', 'Pilot', 1),
        (5, 'Anna', 'Subot', 'stewardes', 1),
        (6, 'Elena', 'Gerasimova', 'stewardes', 1);
 
-insert into route (id, title, arrival_date_time, duration, departure_city_id, arrival_city_id)
-VALUES (1, 'Minsk - Moscow', '12/04/2023', 85.00, 2, 1),
-       (2, 'Minsk - Warsaw', '22/04/2023', 70.00, 2, 3),
-       (3, 'Minsk - Berlin', '21/04/2023', 120.00, 2, 4),
-       (4, 'Minsk - Sochi', '15/04/2023', 165.00, 2, 5);
+insert into route (id, arrival_date_time, duration, departure_city_id, arrival_city_id)
+VALUES (1, '12/04/2023', 85.00, 2, 1),
+       (2,  '22/04/2023', 70.00, 2, 3),
+       (3, '21/04/2023', 120.00, 2, 4),
+       (4, '15/04/2023', 165.00, 2, 5);
 
 insert into plane_route (id, plane_id, route_id)
 VALUES (1, 1, 1),
@@ -46,31 +46,25 @@ VALUES (1, 'new'),
        (6, 'closed'),
        (7, 'canceled');
 
-insert into air_crew (id, plane_id, crew_id)
-VALUES (1, 1, 1),
-       (2, 1, 2),
-       (3, 1, 3),
-       (4, 1, 4),
-       (5, 1, 5),
-       (6, 1, 6);
-
 insert into payment_status (id, status_payment)
-VALUES
-    (1, 'unpaid'),
-    (2, 'paid'),
-    (3, 'failed'),
-    (4, 'expired'),
-    (5, 'refunding'),
-    (6, 'refunded');
+VALUES (1, 'unpaid'),
+       (2, 'paid'),
+       (3, 'failed'),
+       (4, 'expired'),
+       (5, 'refunding'),
+       (6, 'refunded');
 
+INSERT INTO orders (id, number_order, date_order, route_id, plane_id, passenger_id, order_status_id)
+VALUES (1, 1, '03.04.2023 11.30', 1, 1, 1, 2),
+       (2, 2, '04.04.2023 8.30', 1, 1, 2, 2),
+       (3, 3, '05.04.2023 16.30', 2, 2, 3, 2);
 
+INSERT INTO ticket (id, number_place, cost_place, orders_id)
+VALUES (1, 14, 150.50, 1),
+       (2, 55, 100.50, 2),
+       (3, 26, 120.50, 3);
 
-
-
-
-
-
-
-
-
-
+INSERT INTO payment (id, orders_id, payment_status_id)
+VALUES (1, 1, 2),
+       (2, 2, 2),
+       (3, 3, 2);

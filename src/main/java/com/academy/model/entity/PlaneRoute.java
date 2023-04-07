@@ -9,6 +9,6 @@ import lombok.Data;
 @Builder
 public class PlaneRoute {
     private Integer id;
-    private Integer planeId;
-    private Integer routeId;
+    private Plane plane;
+    private Route route;
 }

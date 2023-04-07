@@ -1,5 +1,7 @@
-package com.academy.controller;
+package com.academy.controller.impl;
 
+import com.academy.controller.Controller;
+import com.academy.controller.PassengerController;
 import com.academy.model.entity.Passenger;
 import com.academy.model.repository.PassengerRepository;
 import com.academy.model.repository.impl.PassengerRepositoryImpl;
@@ -18,15 +20,14 @@ public class PassengerControllerImp implements PassengerController {
     private PassengerRepository passengerRepository = new PassengerRepositoryImpl();
     private PassengerController passengerController;
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    private BufferedReader readerTwo = new BufferedReader(new InputStreamReader(System.in));
 
     public void menuPassenger() throws IOException {
         System.out.println("Welcome! Passenger Menu");
         System.out.println("1. Creating a user");
         System.out.println("2. Changing user data");
-        System.out.println("3. Вернуть купленные фильмы/мероприятия (View purchased films of the event)");
-        System.out.println("4. Просмотреть  купленные билеты фильмы/мероприятия (View purchased tickets films of the event)");
-        System.out.println("0. Выход (Exit)");
+        System.out.println("3. Delete user");
+        System.out.println("4. View all passengers");
+        System.out.println("0. Exit");
         int number = Integer.parseInt(reader.readLine());
         passengerController = new PassengerControllerImp();
         switch (number) {
@@ -38,22 +39,21 @@ public class PassengerControllerImp implements PassengerController {
                 passengerRepository.update(passengerController.update());
                 menuPassenger();
                 break;
-//            case 3:
-//                ticketService.refundMovieTicket(loginInApp);
-//                menuPersonController(loginInApp);
-//                break;
-//            case 4:
-//                ticketService.viewPurchasedMovieTickets(loginInApp);
-//                menuPersonController(loginInApp);
-//                break;
-//            case 0:
-//                log.info("Пользователь " + loginInApp + "вышел из приложения ");
-//                break;
-            default:
-                System.out.println("Введите номер меню (Enter menu number)");
+            case 3:
+                passengerRepository.delete(passengerController.delete());
+                menuPassenger();
                 break;
-
-
+            case 4:
+                passengerController.findAll();
+                menuPassenger();
+                break;
+            case 0:
+                Controller controller = new Controller();
+                controller.menuController();
+                break;
+            default:
+                System.out.println("Enter menu number");
+                break;
         }
     }
 
@@ -67,7 +67,7 @@ public class PassengerControllerImp implements PassengerController {
             passenger.setSurName(reader.readLine());
             System.out.println("Enter your birthday");
             passenger.setDob(reader.readLine());
-            System.out.println("Enter the gender");
+            System.out.println("Enter the gender(male/female)");
             passenger.setSex(reader.readLine());
             System.out.println("Enter your passport number");
             passenger.setPassportNumber(reader.readLine());
@@ -79,22 +79,24 @@ public class PassengerControllerImp implements PassengerController {
 
     @Override
     public Passenger update() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         var passengerAll = passengerRepository.findAll();
         System.out.println(passengerAll);
         Passenger passenger = new Passenger();
         try {
             System.out.println("Enter Id");
-            passenger.setId(readerTwo.read());
+            Integer scanId = Integer.parseInt(reader.readLine());
+            passenger.setId(scanId);
             System.out.println("Enter a name");
-            passenger.setFirstName(readerTwo.readLine());
+            passenger.setFirstName(reader.readLine());
             System.out.println("Enter your last name");
-            passenger.setSurName(readerTwo.readLine());
+            passenger.setSurName(reader.readLine());
             System.out.println("Enter your birthday");
-            passenger.setDob(readerTwo.readLine());
-            System.out.println("Enter the gender");
-            passenger.setSex(readerTwo.readLine());
+            passenger.setDob(reader.readLine());
+            System.out.println("Enter the gender(male/female)");
+            passenger.setSex(reader.readLine());
             System.out.println("Enter your passport number");
-            passenger.setPassportNumber(readerTwo.readLine());
+            passenger.setPassportNumber(reader.readLine());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -103,11 +105,23 @@ public class PassengerControllerImp implements PassengerController {
 
     @Override
     public Passenger delete() {
-        return null;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        var passengerAll = passengerRepository.findAll();
+        System.out.println(passengerAll);
+        Passenger passenger = new Passenger();
+        try {
+            System.out.println("Select the user to delete");
+            Integer scanId = Integer.parseInt(reader.readLine());
+            passenger.setId(scanId);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return passenger;
     }
 
     @Override
     public void findAll() {
-
+        var passengerAll = passengerRepository.findAll();
+        System.out.println(passengerAll);
     }
 }

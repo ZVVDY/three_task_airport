@@ -9,9 +9,8 @@ import lombok.Data;
 @Builder
 public class Route {
     private Integer id;
-    private String title;
     private Double duration;
     private String arrivalDateTime;
-    private Integer departureCityId;
-    private Integer arrivalCityId;
+    private City departureCity;
+    private City arrivalCity;
 }

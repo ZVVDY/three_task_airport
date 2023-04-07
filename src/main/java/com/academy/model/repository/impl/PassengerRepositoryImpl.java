@@ -42,11 +42,8 @@ public class PassengerRepositoryImpl implements PassengerRepository {
             preparedStatement.setString(3, passenger.getDob());
             preparedStatement.setString(4, passenger.getSex());
             preparedStatement.setString(5, passenger.getPassportNumber());
-            /***
-             *
-             */
             preparedStatement.setInt(6, passenger.getId());
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -60,7 +57,6 @@ public class PassengerRepositoryImpl implements PassengerRepository {
 
         try (var preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, passenger.getId());
-
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();

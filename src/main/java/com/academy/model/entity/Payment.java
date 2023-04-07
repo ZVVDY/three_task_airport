@@ -9,6 +9,5 @@ import lombok.Data;
 @Builder
 public class Payment {
     private Integer id;
-    private Integer statusPaymentId;
-    private Integer orderId;
+    private Order order;
 }

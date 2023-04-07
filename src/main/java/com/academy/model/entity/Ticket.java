@@ -11,5 +11,5 @@ public class Ticket {
     private Integer id;
     private Integer numberPlace;
     private Double costPlace;
-    private Integer orderId;
+    private Order order;
    }

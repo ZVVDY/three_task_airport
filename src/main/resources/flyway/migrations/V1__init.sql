@@ -37,20 +37,9 @@ create table crew
     FOREIGN KEY (plane_id) REFERENCES plane (id)
 );
 
-create table air_crew
-(
-    id       int not null auto_increment,
-    plane_id int not null,
-    crew_id  int not null,
-    primary key (id),
-    FOREIGN KEY (plane_id) REFERENCES plane (id),
-    FOREIGN KEY (crew_id) REFERENCES crew (id)
-);
-
 create table route
 (
     id                int              not null auto_increment,
-    title             varchar(256)     not null,
     arrival_date_time varchar(256)     not null,
     duration          DOUBLE PRECISION not null,
     departure_city_id int              not null,
@@ -81,7 +70,6 @@ create table order_status
 create table orders
 (
     id              int          not null auto_increment,
-    number_order    int          not null,
     date_order      varchar(256) not null,
     route_id        int          not null,
     plane_id        int          not null,
@@ -112,12 +100,9 @@ create table payment
     FOREIGN KEY (payment_status_id) REFERENCES payment_status (id)
 );
 
-
-
 create table ticket
 (
     id           int              not null auto_increment,
-    number_order int              not null,
     number_place int              not null,
     cost_place   double precision not null,
     orders_id    int              not null,

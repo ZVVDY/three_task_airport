@@ -9,10 +9,9 @@ import lombok.Data;
 @Builder
 public class Order {
     private Integer id;
-    private Integer numberOrder;
     private String dateOrder;
-    private Integer routeId;
-    private Integer planeId;
-    private Integer passengerId;
-    private Integer statusOrderId;
+    private Plane plane;
+    private Route route;
+    private Passenger passenger;
+    private OrderStatus orderStatus;
   }
