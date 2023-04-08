@@ -54,10 +54,10 @@ VALUES (1, 'unpaid'),
        (5, 'refunding'),
        (6, 'refunded');
 
-INSERT INTO orders (id, number_order, date_order, route_id, plane_id, passenger_id, order_status_id)
-VALUES (1, 1, '03.04.2023 11.30', 1, 1, 1, 2),
-       (2, 2, '04.04.2023 8.30', 1, 1, 2, 2),
-       (3, 3, '05.04.2023 16.30', 2, 2, 3, 2);
+INSERT INTO orders (id, date_order, route_id, plane_id, passenger_id, order_status_id)
+VALUES (1, '03.04.2023 11.30', 1, 1, 1, 2),
+       (2, '04.04.2023 8.30', 1, 1, 2, 2),
+       (3, '05.04.2023 16.30', 2, 2, 3, 2);
 
 INSERT INTO ticket (id, number_place, cost_place, orders_id)
 VALUES (1, 14, 150.50, 1),

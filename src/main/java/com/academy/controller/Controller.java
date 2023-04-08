@@ -2,8 +2,6 @@ package com.academy.controller;
 
 import com.academy.controller.impl.OrderControllerImpl;
 import com.academy.controller.impl.PassengerControllerImp;
-import com.academy.model.repository.PassengerRepository;
-import com.academy.model.repository.impl.PassengerRepositoryImpl;
 import lombok.Data;
 
 import java.io.BufferedReader;
@@ -14,7 +12,6 @@ import java.io.InputStreamReader;
 public class Controller {
     private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
     private PassengerController passengerController = new PassengerControllerImp();
-    private PassengerRepository passengerRepository = new PassengerRepositoryImpl();
 
     public void menuController() throws IOException {
         System.out.println("Welcome! Airport application");
@@ -29,7 +26,7 @@ public class Controller {
         int number = Integer.parseInt(bufferedReader.readLine());
         switch (number) {
             case 1:
-                passengerController.menuPassenger();
+                passengerController.menu();
                 break;
             case 2:
                 menuController();
@@ -45,7 +42,7 @@ public class Controller {
                 break;
             case 6:
                 OrderController orderController = new OrderControllerImpl();
-                orderController.findAll();
+                orderController.menu();
                 menuController();
                 break;
             case 7:
@@ -54,7 +51,7 @@ public class Controller {
             case 0:
                 break;
             default:
-                System.out.println("Введите номер меню (Enter menu number)");
+                System.out.println("Enter menu number");
                 break;
         }
     }
