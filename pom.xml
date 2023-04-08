@@ -42,7 +42,7 @@
             <locations>
 <location>filesystem:src/main/resources/flyway/migrations</location>
             </locations>
-            <url>jdbc:mysql://localhost:3306/test_2023</url>
+            <url>jdbc:mysql://localhost:3306/airport</url>
             <user>root</user>
             <password>admin</password>
         </configuration>

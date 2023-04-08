@@ -124,6 +124,12 @@ public class OrderRepositoryImpl implements OrderRepository {
                         .arrivalCity(arrivalCity)
                         .build();
 
+                var ticket = Ticket.builder()
+                        .id(resultSet.getInt("ticket_number"))
+                        .costPlace(resultSet.getDouble("cost_place"))
+                        .numberPlace(resultSet.getInt("number_place"))
+                        .build();
+
                 var order = Order.builder()
                         .id(resultSet.getInt("order_number"))
                         .dateOrder(resultSet.getString("date_order"))
@@ -131,7 +137,9 @@ public class OrderRepositoryImpl implements OrderRepository {
                         .orderStatus(orderStatus)
                         .plane(plane)
                         .route(route)
+                        .ticket(ticket)
                         .build();
+
 
                 orders.add(order);
             }
@@ -144,6 +152,88 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public Order findById(Integer id) {
-        return null;
+        var order = new Order();
+
+        var connection = DataSourceManager.getInstance().getConnection();
+
+        String sql = "SELECT \n" +
+                "passenger.id AS passenger_id,passenger.first_name as first_name,passenger.sur_name as sur_name, \n" +
+                "passenger.dob as dob,passenger.sex as sex, passenger.passport_number as passport_number,\n" +
+                "orders.id AS order_id, orders.date_order as date_order,orders.order_status_id as order_status_id,\n" +
+                "route.duration as duration, route.arrival_date_time as arrival_date_time,route.arrival_city_id as arrival_city_id,\n" +
+                "route.departure_city_id as departure_city_id,\n" +
+                "order_status.id as order_status_id,order_status.status_order as status_order,\n" +
+                "plane.model as model,plane.manufacturer as manufacturer,plane.number_of_seats as number_of_seats,\n" +
+                "ticket.id as ticket_number, ticket.cost_place as cost_place, ticket.number_place as number_place\n" +
+                "                FROM orders  \n" +
+                "                JOIN order_status ON  order_status.id=orders.order_status_id\n" +
+                "                JOIN   passenger  ON passenger.id = orders.id \n" +
+                "                JOIN  plane  ON plane.id = orders.id \n" +
+                "                JOIN route  ON route.id=orders.id\n" +
+                "                JOIN ticket  ON ticket.id = orders.id\n" +
+                "where orders.id = ?";
+
+        try (var preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            var resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                var passenger = Passenger.builder()
+                        .id(resultSet.getInt("passenger_id"))
+                        .firstName(resultSet.getString("first_name"))
+                        .surName(resultSet.getString("sur_name"))
+                        .dob(resultSet.getString("dob"))
+                        .sex(resultSet.getString("sex"))
+                        .passportNumber(resultSet.getString("passport_number"))
+                        .build();
+
+                var plane = Plane.builder()
+                        .model(resultSet.getString("model"))
+                        .numberOfSeats(resultSet.getInt("number_of_seats"))
+                        .manufacturer(resultSet.getString("manufacturer"))
+                        .build();
+
+                var orderStatus = OrderStatus.builder()
+                        .id(resultSet.getInt("order_status_id"))
+                        .statusOrder(resultSet.getString("status_order"))
+                        .build();
+
+                var departureCity = City.builder()
+                        .title(resultSet.getString("departure_city_id"))
+                        .build();
+
+                var arrivalCity = City.builder()
+                        .title(resultSet.getString("arrival_city_id"))
+                        .build();
+
+                var route = Route.builder()
+                        .duration(resultSet.getDouble("duration"))
+                        .arrivalDateTime(resultSet.getString("arrival_date_time"))
+                        .departureCity(departureCity)
+                        .arrivalCity(arrivalCity)
+                        .build();
+
+                var ticket = Ticket.builder()
+                        .id(resultSet.getInt("ticket_number"))
+                        .costPlace(resultSet.getDouble("cost_place"))
+                        .numberPlace(resultSet.getInt("number_place"))
+                        .build();
+
+                order.setId(resultSet.getInt("order_id"));
+                order.setDateOrder(resultSet.getString("date_order"));
+                order.setPassenger(passenger);
+                order.setPlane(plane);
+                order.setOrderStatus(orderStatus);
+                order.setRoute(route);
+                order.setTicket(ticket);
+
+            } else {
+                System.out.println(" No search ID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return order;
     }
 }
